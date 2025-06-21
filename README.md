@@ -4,7 +4,6 @@ Bem-vindo ao projeto de Aula Interativa de JavaScript! Este é um recurso educac
 
 O projeto combina uma explicação teórica clara com um design moderno (com temas claro e escuro) e desafios práticos para solidificar o aprendizado.
 
-![Pré-visualização do Projeto](https://i.imgur.com/39aF6QO.png)
 
 ## ✨ Funcionalidades
 
