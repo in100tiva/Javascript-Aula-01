@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução ao JavaScript: Aula e Desafios</title>
+    <style>
+        /* FONTES DO GOOGLE */
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Lora:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+        /* ESTILOS BASE E DEFINIÇÃO DOS TEMAS */
+        :root {
+            --background: oklch(0.9751 0.0127 244.2507);
+            --foreground: oklch(0.3729 0.0306 259.7328);
+            --card: oklch(1.0000 0 0);
+            --card-foreground: oklch(0.3729 0.0306 259.7328);
+            --popover: oklch(1.0000 0 0);
+            --popover-foreground: oklch(0.3729 0.0306 259.7328);
+            --primary: oklch(0.7227 0.1920 149.5793);
+            --primary-foreground: oklch(1.0000 0 0);
+            --secondary: oklch(0.9514 0.0250 236.8242);
+            --secondary-foreground: oklch(0.4461 0.0263 256.8018);
+            --muted: oklch(0.9670 0.0029 264.5419);
+            --muted-foreground: oklch(0.5510 0.0234 264.3637);
+            --accent: oklch(0.9505 0.0507 163.0508);
+            --accent-foreground: oklch(0.3729 0.0306 259.7328);
+            --destructive: oklch(0.6368 0.2078 25.3313);
+            --destructive-foreground: oklch(1.0000 0 0);
+            --border: oklch(0.9276 0.0058 264.5313);
+            --input: oklch(0.9276 0.0058 264.5313);
+            --ring: oklch(0.7227 0.1920 149.5793);
+            --font-sans: 'DM Sans', sans-serif;
+            --font-serif: 'Lora', serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+            --radius: 0.5rem;
+            --shadow-sm: 0px 4px 8px -1px hsl(0 0% 0% / 0.05), 0px 1px 2px -2px hsl(0 0% 0% / 0.05);
+            --shadow: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 1px 2px -2px hsl(0 0% 0% / 0.10);
+            --shadow-md: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 2px 4px -2px hsl(0 0% 0% / 0.10);
+        }
+
+        .dark {
+            --background: oklch(0.2077 0.0398 265.7549);
+            --foreground: oklch(0.8717 0.0093 258.3382);
+            --card: oklch(0.2795 0.0368 260.0310);
+            --card-foreground: oklch(0.8717 0.0093 258.3382);
+            --popover: oklch(0.2795 0.0368 260.0310);
+            --popover-foreground: oklch(0.8717 0.0093 258.3382);
+            --primary: oklch(0.7729 0.1535 163.2231);
+            --primary-foreground: oklch(0.2077 0.0398 265.7549);
+            --secondary: oklch(0.3351 0.0331 260.9120);
+            --secondary-foreground: oklch(0.7118 0.0129 286.0665);
+            --muted: oklch(0.2795 0.0368 260.0310);
+            --muted-foreground: oklch(0.5510 0.0234 264.3637);
+            --accent: oklch(0.3729 0.0306 259.7328);
+            --accent-foreground: oklch(0.7118 0.0129 286.0665);
+            --destructive: oklch(0.6368 0.2078 25.3313);
+            --destructive-foreground: oklch(0.2077 0.0398 265.7549);
+            --border: oklch(0.4461 0.0263 256.8018);
+            --input: oklch(0.4461 0.0263 256.8018);
+            --ring: oklch(0.7729 0.1535 163.2231);
+        }
+
+        /* ESTILOS GLOBAIS DA PÁGINA */
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            color: var(--primary);
+        }
+
+        h1 { font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem;}
+        h2 { border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem; margin-top: 2.5rem;}
+        h3 { border-bottom: none; color: var(--secondary-foreground); font-size: 1.1rem; margin-top: 1.5rem;}
+        p, li { color: var(--muted-foreground); }
+        
+        code {
+            font-family: var(--font-mono);
+            background-color: var(--muted);
+            color: var(--accent-foreground);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: var(--muted);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: var(--radius);
+            overflow-x: auto;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+        
+        .theme-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 0.5rem 1rem;
+            background-color: var(--secondary);
+            color: var(--secondary-foreground);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            font-family: var(--font-sans);
+            font-weight: 500;
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--card-foreground);
+            margin-bottom: 2rem;
+        }
+
+        strong {
+           color: var(--accent-foreground);
+           font-weight: 500;
+        }
+
+        .challenge-box {
+            background-color: var(--secondary);
+            border-left: 4px solid var(--primary);
+            padding: 0.1rem 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <button class="theme-switcher" id="theme-toggle">Mudar Tema</button>
+
+    <div class="container">
+        <h1>Bem-vindo à sua Introdução ao JavaScript!</h1>
+        <p class="intro-text">Nesta aula, vamos explorar os três pilares fundamentais do JavaScript: <strong>Variáveis</strong>, <strong>Arrays</strong> e <strong>Objetos</strong>. Entender esses conceitos é o primeiro passo para se tornar um desenvolvedor web.</p>
+
+        <section id="variaveis">
+            <h2>1. Variáveis: Os Contêineres de Dados</h2>
+            <p>Pense em variáveis como caixas etiquetadas onde você pode guardar informações. Em JavaScript, temos três maneiras principais de "criar" essas caixas: <code>let</code>, <code>const</code> e <code>var</code>.</p>
+            <ul>
+                <li><code>let</code>: Use quando o valor da variável pode <strong>mudar</strong>.</li>
+                <li><code>const</code>: Use para valores que serão <strong>constantes</strong> e não devem ser alterados.</li>
+                <li><code>var</code>: A forma mais antiga. É bom conhecê-la, mas prefira <code>let</code> e <code>const</code> em código moderno.</li>
+            </ul>
+            <p>As variáveis podem guardar diferentes tipos de dados, como textos (<code>string</code>), números (<code>number</code>) e valores de verdadeiro/falso (<code>boolean</code>).</p>
+            <h3>Exemplo prático:</h3>
+            <pre><code>// Declarando variáveis
+let nomeDoPersonagem = "Link"; // Uma string (texto)
+const jogo = "The Legend of Zelda"; // Uma constante
+let coracoesDeVida = 3; // Um número
+let temAEspadaMestra = false; // Um booleano (falso)
+
+// Modificando uma variável 'let'
+coracoesDeVida = coracoesDeVida + 1; // Agora Link tem 4 corações
+
+// Exibindo no console do navegador
+console.log("Personagem:", nomeDoPersonagem);
+console.log("Vida atual:", coracoesDeVida);
+console.log("Possui a Espada Mestra?", temAEspadaMestra);</code></pre>
+        </section>
+
+        <section id="arrays">
+            <h2>2. Arrays: Listas Organizadas</h2>
+            <p>Um array é simplesmente uma lista ordenada de itens. É perfeito para guardar coleções de dados, como uma lista de tarefas, um inventário de itens ou uma lista de usuários.</p>
+            <p>Criamos arrays usando colchetes <code>[]</code> e separamos os itens com vírgulas. O primeiro item de um array está sempre na posição <code>0</code>.</p>
+             <h3>Exemplo prático:</h3>
+            <pre><code>// Criando um array com os itens do inventário
+let inventario = ["Espada", "Escudo", "Arco e Flecha"];
+
+// Acessando um item pelo seu índice (posição)
+console.log("Primeiro item:", inventario[0]); // -> "Espada"
+console.log("Terceiro item:", inventario[2]); // -> "Arco e Flecha"
+
+// Adicionando um item ao FINAL do array
+inventario.push("Bomba");
+console.log("Inventário atualizado:", inventario); // -> ["Espada", "Escudo", "Arco e Flecha", "Bomba"]
+
+// Removendo o ÚLTIMO item do array
+let itemRemovido = inventario.pop();
+console.log("Item removido:", itemRemovido); // -> "Bomba"
+console.log("Inventário final:", inventario);
+
+// Verificando o tamanho do array
+console.log("Total de itens:", inventario.length); // -> 3</code></pre>
+        </section>
+
+        <section id="objetos">
+            <h2>3. Objetos: Descrevendo Entidades Complexas</h2>
+            <p>Objetos nos permitem representar coisas mais complexas do mundo real. Eles funcionam com um sistema de <strong>chave-valor</strong>. Por exemplo, para descrever um "carro", podemos ter as chaves "cor", "marca" e "ano", cada uma com seu respectivo valor.</p>
+            <p>Criamos objetos usando chaves <code>{}</code>. Para acessar, alterar ou adicionar propriedades, usamos a notação de ponto (<code>objeto.propriedade</code>).</p>
+            <h3>Exemplo prático:</h3>
+            <pre><code>// Criando um objeto para representar um usuário
+const usuario = {
+  nome: "Zelda",
+  reino: "Hyrule",
+  idade: 17,
+  possuiTriforceDaSabedoria: true,
+  habilidades: ["Magia", "Arquearia", "Liderança"]
+};
+
+// Acessando as propriedades do objeto
+console.log("Nome da usuária:", usuario.nome);
+console.log("Reino:", usuario.reino);
+console.log("Primeira habilidade:", usuario.habilidades[0]); // Podemos ter arrays dentro de objetos!
+
+// Modificando uma propriedade existente
+usuario.idade = 117; // A idade canônica dela é mais complexa :)
+console.log("Idade atualizada:", usuario.idade);
+
+// Adicionando uma nova propriedade
+usuario.email = "zelda@hyrule.gov";
+console.log("Email adicionado:", usuario.email);
+
+// Vendo o objeto completo
+console.log(usuario);</code></pre>
+        </section>
+
+        <section id="desafios">
+            <h2>Desafios Práticos</h2>
+            <p>Agora é sua vez de codificar! Tente resolver os desafios abaixo no console do seu navegador.</p>
+
+            <div>
+                <h3>Variáveis e Tipos de Dados</h3>
+                <div class="challenge-box">
+                    <h4>Desafio 1: Perfil de Usuário</h4>
+                    <p>Crie variáveis para guardar as seguintes informações de um usuário: <code>nome</code> (string), <code>idade</code> (number), <code>cidade</code> (string) e se ele é <code>assinante</code> (boolean). Depois, exiba a seguinte frase no console, usando as variáveis: "<em>[Nome]</em>, de <em>[idade]</em> anos, mora em <em>[cidade]</em> e <em>[é/não é]</em> assinante."</p>
+                </div>
+                <div class="challenge-box">
+                    <h4>Desafio 2: Calculadora de Dano</h4>
+                    <p>Declare uma constante <code>danoBase</code> com valor 10. Declare uma variável <code>danoBonus</code> com valor 5. Calcule o <code>danoTotal</code> somando as duas variáveis e exiba o resultado no console.</p>
+                </div>
+                <div class="challenge-box">
+                    <h4>Desafio 3: Status de Login</h4>
+                    <p>Declare uma variável <code>isLogado</code> e atribua a ela o valor <code>true</code>. Em seguida, declare uma constante <code>mensagemBoasVindas</code>. Usando uma operação lógica, exiba no console a mensagem de boas-vindas <strong>apenas se</strong> <code>isLogado</code> for verdadeiro.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3>Arrays</h3>
+                 <div class="challenge-box">
+                    <h4>Desafio 1: Lista de Compras</h4>
+                    <p>Crie um array chamado <code>listaDeCompras</code> com três itens. Adicione um novo item ao <strong>final</strong> da lista. Depois, remova o <strong>primeiro</strong> item da lista. Por fim, exiba a lista final e seu tamanho (<code>length</code>) no console.</p>
+                </div>
+                <div class="challenge-box">
+                    <h4>Desafio 2: Fila de Atendimento</h4>
+                    <p>Simule uma fila (o primeiro a entrar é o primeiro a sair). Crie um array <code>fila</code> com três nomes. Adicione mais dois nomes ao <strong>final</strong> da fila. Depois, "atenda" o primeiro da fila, removendo-o. Exiba quem foi atendido e como ficou a fila depois.</p>
+                </div>
+                 <div class="challenge-box">
+                    <h4>Desafio 3: Top 3 Músicas</h4>
+                    <p>Crie um array <code>topMusicas</code> com suas 3 músicas favoritas. Acesse e exiba no console a música que está na posição número 2 (lembre-se que os índices começam em 0). Troque a música da primeira posição por uma nova música de sua escolha. Exiba o array atualizado.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3>Objetos</h3>
+                 <div class="challenge-box">
+                    <h4>Desafio 1: Cadastro de Livro</h4>
+                    <p>Crie um objeto chamado <code>livro</code> para representar um livro, com as propriedades: <code>titulo</code> (string), <code>autor</code> (string), <code>anoPublicacao</code> (number) e <code>genero</code> (string). Exiba o título e o autor do livro no console.</p>
+                </div>
+                <div class="challenge-box">
+                    <h4>Desafio 2: Ficha de Personagem de RPG</h4>
+                    <p>Crie um objeto <code>personagem</code> com <code>nome</code>, <code>classe</code> e <code>nivel</code>. Depois de criar o objeto, adicione uma nova propriedade chamada <code>equipamentos</code>, que deve ser um <strong>array</strong> com dois itens (ex: "Espada Longa", "Armadura de Couro"). Modifique o <code>nivel</code> do personagem, aumentando-o em 1. Exiba o objeto completo no console.</p>
+                </div>
+                 <div class="challenge-box">
+                    <h4>Desafio 3: Detalhes do Produto</h4>
+                    <p>Crie um objeto <code>produto</code> com <code>nome</code> e <code>preco</code>. Adicione a ele uma propriedade <code>detalhes</code>, que será <strong>outro objeto</strong> contendo <code>fabricante</code> (string) e <code>modelo</code> (string). Acesse e exiba no console o nome do produto, seu preço e o nome do fabricante.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // SCRIPT PARA O BOTÃO DE TROCAR O TEMA
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Função para aplicar o tema
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                body.classList.add('dark');
+            } else {
+                body.classList.remove('dark');
+            }
+        };
+
+        // Evento do botão
+        themeToggle.addEventListener('click', () => {
+            const newTheme = body.classList.contains('dark') ? 'light' : 'dark';
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Aplicar tema salvo ao carregar a página
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        }
+    </script>
+</body>
+</html>
