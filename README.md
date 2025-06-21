@@ -34,13 +34,6 @@ Para começar a aprender, siga estes simples passos:
     -   Copie os blocos de código dos exemplos, cole no console e pressione `Enter` para ver a saída.
     -   Tente resolver os desafios propostos no final da página, escrevendo seu código diretamente no console.
 
-## 🎨 Pré-visualização dos Temas
-
-Aproveite a experiência de aprendizado com o tema que mais lhe agrada.
-
-| Tema Claro                               | Tema Escuro                                |
-| ---------------------------------------- | ------------------------------------------ |
-| ![Tema Claro](https://i.imgur.com/8i9Y6d9.png) | ![Tema Escuro](https://i.imgur.com/2s9VlqR.png) |
 
 ## 💻 Tecnologias Utilizadas
 
